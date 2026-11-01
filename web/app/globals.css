@@ -1,0 +1,1280 @@
+/*
+ * Theme on top of Bootstrap 5.3. Values measured from etherscan.io's computed styles and theme.min.css (2026-10/11):
+ * Roboto 14.5px base, #212529 text, #0784c3 links/primary, #081d35 dark, #e9ecef borders, 12px card radius with a
+ * soft shadow, 8px button radius; dim and dark palettes from research/chrome.md §1.2-1.4. Our own code and assets.
+ *
+ * Every colour lives in a --ex-* variable below. <html> carries data-ex-theme="light|dim|dark" (and Bootstrap's
+ * data-bs-theme="light|dark"), set before the first paint by the boot script in app/layout.tsx. Bootstrap's own
+ * variables are pointed at ours in :root, so Bootstrap classes follow the theme too.
+ */
+
+/* ---------- light (default) ---------- */
+:root {
+  --ex-primary: #0784c3;
+  --ex-primary-rgb: 7, 132, 195;
+  --ex-primary-hover: #06699c;
+  --ex-link: #0784c3;
+  --ex-link-rgb: 7, 132, 195;
+  --ex-link-hover: #06699c;
+  --ex-link-hover-rgb: 6, 105, 156;
+  /* Etherscan's navy "ink": brand text, pills, .text-dark. In dim/dark it turns light, as Etherscan's text-dark does. */
+  --ex-dark: #081d35;
+  --ex-dark-rgb: 8, 29, 53;
+  --ex-text: #212529;
+  --ex-text-rgb: 33, 37, 41;
+  --ex-heading: #212529;
+  --ex-emphasis: #000;
+  --ex-emphasis-rgb: 0, 0, 0;
+  --ex-black-rgb: 0, 0, 0;
+  --ex-muted: #6c757d;
+  --ex-muted-rgb: 108, 117, 125;
+  --ex-border: #e9ecef;
+  --ex-border-strong: #dee2e6;
+  --ex-soft: #f8f9fa;
+  --ex-soft-rgb: 248, 249, 250;
+  --ex-page: #fff;
+  --ex-page-rgb: 255, 255, 255;
+  --ex-surface: #fff;
+  --ex-surface-rgb: 255, 255, 255;
+  --ex-hover-bg: #e9ecef;
+  --ex-menu-link: #212529;
+  --ex-nav-color: #000;
+  --ex-icon: #495057;
+  --ex-icon-muted: #adb5bd;
+  --ex-menu-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  --ex-card-shadow: 0 8px 19.2px 0 rgba(189, 197, 209, 0.2);
+  --ex-header-shadow: 0 5px 10px rgba(151, 164, 175, 0.05);
+  --ex-hero-bg: #081d35;
+  --ex-hero-bg-rgb: 8, 29, 53;
+  --ex-on-dark: #fff;
+  --ex-on-dark-muted: rgba(255, 255, 255, 0.6);
+  --ex-on-primary: #fff;
+  --ex-kbd-bg: rgba(8, 29, 53, 0.25);
+  --ex-row-hover: rgba(0, 0, 0, 0.025);
+  --ex-btn-white-bg: #fff;
+  --ex-btn-white-color: #212529;
+  --ex-btn-secondary-bg: #e9ecef;
+  --ex-btn-secondary-hover-bg: #dee2e6;
+  --ex-btn-secondary-color: #081d35;
+  --ex-segment-active: #fff;
+  --ex-pill-bg: #e9ecef;
+  --ex-pill-hover-bg: #dee2e6;
+  --ex-method-ink: #000;
+  --ex-method-border: rgba(0, 0, 0, 0.1);
+  --ex-focus-border: rgba(7, 132, 195, 0.5);
+  --ex-focus-ring: 0 0 0 0.15rem rgba(7, 132, 195, 0.25);
+  --ex-success: #00a186;
+  --ex-success-rgb: 0, 161, 134;
+  --ex-success-soft: rgba(0, 161, 134, 0.1);
+  --ex-danger: #dc3545;
+  --ex-danger-rgb: 220, 53, 69;
+  --ex-danger-soft: rgba(220, 53, 69, 0.1);
+  --ex-warning: #cc9a06;
+  --ex-warning-rgb: 255, 193, 7;
+  --ex-warning-soft: rgba(255, 193, 7, 0.12);
+  --ex-warning-ink: #6b5103;
+  --ex-warning-line: rgba(204, 154, 6, 0.35);
+  --ex-neutral-rgb: 173, 181, 189;
+  --ex-chart-line: #212529;
+  --ex-logo-from: #0aa5d8;
+  --ex-logo-to: #081d35;
+  --ex-logo-bar: #fff;
+  --ex-select-chevron: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23212529' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.6' d='m3 6 5 5 5-5'/%3e%3c/svg%3e");
+  /* Source viewer (VS Code light / dark+ token colours). */
+  --ex-code-text: #000;
+  --ex-code-ln: #237893;
+  --ex-code-comment: #008000;
+  --ex-code-string: #a31515;
+  --ex-code-keyword: #0000ff;
+  --ex-code-number: #098658;
+  --ex-file-sol: #e8590c;
+  --ex-file-json: #cc9a06;
+  --ex-file-contract: #6f42c1;
+  --ex-file-fn: #e8a10c;
+
+  /* Bootstrap, pointed at the tokens above (declared after Bootstrap's own :root and dark blocks, so these win). */
+  --bs-body-font-family: var(--font-roboto), system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --bs-body-font-size: 0.90625rem;
+  --bs-body-color: var(--ex-text);
+  --bs-body-color-rgb: var(--ex-text-rgb);
+  --bs-body-bg: var(--ex-page);
+  --bs-body-bg-rgb: var(--ex-page-rgb);
+  --bs-emphasis-color: var(--ex-emphasis);
+  --bs-emphasis-color-rgb: var(--ex-emphasis-rgb);
+  --bs-heading-color: var(--ex-heading);
+  --bs-secondary-color: var(--ex-muted);
+  --bs-secondary-color-rgb: var(--ex-muted-rgb);
+  --bs-secondary-bg: var(--ex-hover-bg);
+  --bs-tertiary-bg: var(--ex-soft);
+  --bs-border-color: var(--ex-border);
+  --bs-border-color-translucent: var(--ex-border);
+  --bs-link-color: var(--ex-link);
+  --bs-link-color-rgb: var(--ex-link-rgb);
+  --bs-link-hover-color: var(--ex-link-hover);
+  --bs-link-hover-color-rgb: var(--ex-link-hover-rgb);
+  --bs-primary: var(--ex-primary);
+  --bs-primary-rgb: var(--ex-primary-rgb);
+  --bs-success: var(--ex-success);
+  --bs-success-rgb: var(--ex-success-rgb);
+  --bs-dark-rgb: var(--ex-dark-rgb);
+  --bs-light-rgb: var(--ex-soft-rgb);
+  --bs-black-rgb: var(--ex-black-rgb);
+  --bs-focus-ring-color: rgba(var(--ex-primary-rgb), 0.25);
+  --bs-border-radius: 0.5rem;
+}
+
+/* ---------- dim (Etherscan [data-bs-theme=dim]; "Auto" picks dim on a dark system) ---------- */
+[data-ex-theme='dim'] {
+  --ex-link: #6ab5db;
+  --ex-link-rgb: 106, 181, 219;
+  --ex-link-hover: #9ccee7;
+  --ex-link-hover-rgb: 156, 206, 231;
+  --ex-dark: #f2f6fa;
+  --ex-dark-rgb: 242, 246, 250;
+  --ex-text: #e3e9f1;
+  --ex-text-rgb: 227, 233, 241;
+  --ex-heading: #f2f6fa;
+  --ex-emphasis: #fff;
+  --ex-emphasis-rgb: 255, 255, 255;
+  --ex-black-rgb: 255, 255, 255;
+  --ex-muted: #93a3b8;
+  --ex-muted-rgb: 147, 163, 184;
+  --ex-border: #273343;
+  --ex-border-strong: #3a4759;
+  --ex-soft: #162138;
+  --ex-soft-rgb: 22, 33, 56;
+  --ex-page: #111a2e;
+  --ex-page-rgb: 17, 26, 46;
+  --ex-surface: #111a2e;
+  --ex-surface-rgb: 17, 26, 46;
+  --ex-hover-bg: #3a4759;
+  --ex-menu-link: #cbd5e1;
+  --ex-nav-color: #cbd5e1;
+  --ex-icon: #7e8ea2;
+  --ex-icon-muted: #7e8ea2;
+  --ex-menu-shadow: 0 0.5rem 1.2rem rgba(77, 91, 121, 0.2);
+  --ex-card-shadow: 0 0.5rem 1.2rem rgba(82, 85, 92, 0.15);
+  --ex-header-shadow: none;
+  --ex-hero-bg: #0b1120;
+  --ex-hero-bg-rgb: 11, 17, 32;
+  --ex-on-dark: #f2f6fa;
+  --ex-kbd-bg: #47566a;
+  --ex-row-hover: rgba(255, 255, 255, 0.025);
+  --ex-btn-white-bg: #162138;
+  --ex-btn-white-color: #f2f6fa;
+  --ex-btn-secondary-bg: #273343;
+  --ex-btn-secondary-hover-bg: #3a4759;
+  --ex-btn-secondary-color: #f2f6fa;
+  --ex-segment-active: #47566a;
+  --ex-pill-bg: #273343;
+  --ex-pill-hover-bg: #47566a;
+  --ex-method-ink: #e3e9f1;
+  --ex-method-border: rgba(255, 255, 255, 0.1);
+  --ex-focus-border: transparent;
+  --ex-focus-ring: 0 0 0 0.15rem rgba(255, 255, 255, 0.1);
+  --ex-warning-ink: #ffda6a;
+  --ex-chart-line: #cbd5e1;
+  --ex-logo-to: #0784c3;
+  --ex-select-chevron: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23adb5bd' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.6' d='m3 6 5 5 5-5'/%3e%3c/svg%3e");
+  --ex-code-text: #d4d4d4;
+  --ex-code-ln: #858585;
+  --ex-code-comment: #6a9955;
+  --ex-code-string: #ce9178;
+  --ex-code-keyword: #569cd6;
+  --ex-code-number: #b5cea8;
+  --ex-file-contract: #b392f0;
+}
+
+/* ---------- dark (Etherscan's later [data-bs-theme=dark] block) ---------- */
+[data-ex-theme='dark'] {
+  --ex-link: #6ab5db;
+  --ex-link-rgb: 106, 181, 219;
+  --ex-link-hover: #9ccee7;
+  --ex-link-hover-rgb: 156, 206, 231;
+  --ex-dark: #fafafa;
+  --ex-dark-rgb: 250, 250, 250;
+  --ex-text: #f5f5f5;
+  --ex-text-rgb: 245, 245, 245;
+  --ex-heading: #fafafa;
+  --ex-emphasis: #fff;
+  --ex-emphasis-rgb: 255, 255, 255;
+  --ex-black-rgb: 255, 255, 255;
+  --ex-muted: #bbb;
+  --ex-muted-rgb: 187, 187, 187;
+  --ex-border: #222;
+  --ex-border-strong: #333;
+  --ex-soft: #151515;
+  --ex-soft-rgb: 21, 21, 21;
+  --ex-page: #111;
+  --ex-page-rgb: 17, 17, 17;
+  --ex-surface: #111;
+  --ex-surface-rgb: 17, 17, 17;
+  --ex-hover-bg: #252525;
+  --ex-menu-link: #ccc;
+  --ex-nav-color: #ccc;
+  --ex-icon: #888;
+  --ex-icon-muted: #888;
+  --ex-menu-shadow: 0 0.5rem 1.2rem rgba(82, 85, 92, 0.2);
+  --ex-card-shadow: 0 0.5rem 1.2rem rgba(82, 85, 92, 0.15);
+  --ex-header-shadow: none;
+  --ex-hero-bg: #0a0a0a;
+  --ex-hero-bg-rgb: 10, 10, 10;
+  --ex-on-dark: #fafafa;
+  --ex-kbd-bg: #333;
+  --ex-row-hover: rgba(255, 255, 255, 0.025);
+  --ex-btn-white-bg: #151515;
+  --ex-btn-white-color: #fafafa;
+  --ex-btn-secondary-bg: #222;
+  --ex-btn-secondary-hover-bg: #252525;
+  --ex-btn-secondary-color: #fafafa;
+  --ex-segment-active: #333;
+  --ex-pill-bg: #222;
+  --ex-pill-hover-bg: #333;
+  --ex-method-ink: #f5f5f5;
+  --ex-method-border: rgba(255, 255, 255, 0.1);
+  --ex-focus-border: transparent;
+  --ex-focus-ring: 0 0 0 0.15rem rgba(255, 255, 255, 0.1);
+  --ex-warning-ink: #ffda6a;
+  --ex-chart-line: #ccc;
+  --ex-logo-to: #0784c3;
+  --ex-select-chevron: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23adb5bd' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.6' d='m3 6 5 5 5-5'/%3e%3c/svg%3e");
+  --ex-code-text: #d4d4d4;
+  --ex-code-ln: #858585;
+  --ex-code-comment: #6a9955;
+  --ex-code-string: #ce9178;
+  --ex-code-keyword: #569cd6;
+  --ex-code-number: #b5cea8;
+  --ex-file-contract: #b392f0;
+}
+
+/* ---------- Bootstrap pieces that hard-code their colours ---------- */
+/* .bg-dark is the hero navy in every theme; --bs-dark-rgb itself is the text "ink" (see --ex-dark). */
+.bg-dark {
+  background-color: rgba(var(--ex-hero-bg-rgb), var(--bs-bg-opacity)) !important;
+}
+.bg-white {
+  background-color: rgba(var(--ex-surface-rgb), var(--bs-bg-opacity)) !important;
+}
+.btn-primary {
+  --bs-btn-color: var(--ex-on-primary);
+  --bs-btn-bg: var(--ex-primary);
+  --bs-btn-border-color: var(--ex-primary);
+  --bs-btn-hover-color: var(--ex-on-primary);
+  --bs-btn-hover-bg: var(--ex-primary-hover);
+  --bs-btn-hover-border-color: var(--ex-primary-hover);
+  --bs-btn-active-color: var(--ex-on-primary);
+  --bs-btn-active-bg: var(--ex-primary-hover);
+  --bs-btn-active-border-color: var(--ex-primary-hover);
+  --bs-btn-disabled-color: var(--ex-on-primary);
+  --bs-btn-disabled-bg: var(--ex-primary);
+  --bs-btn-disabled-border-color: var(--ex-primary);
+  --bs-btn-focus-shadow-rgb: var(--ex-primary-rgb);
+}
+.btn-outline-primary {
+  --bs-btn-color: var(--ex-link);
+  --bs-btn-border-color: var(--ex-primary);
+  --bs-btn-hover-color: var(--ex-on-primary);
+  --bs-btn-hover-bg: var(--ex-primary);
+  --bs-btn-hover-border-color: var(--ex-primary);
+  --bs-btn-focus-shadow-rgb: var(--ex-primary-rgb);
+  --bs-btn-active-color: var(--ex-on-primary);
+  --bs-btn-active-bg: var(--ex-primary);
+  --bs-btn-active-border-color: var(--ex-primary);
+  --bs-btn-disabled-color: var(--ex-link);
+  --bs-btn-disabled-border-color: var(--ex-primary);
+}
+/* Etherscan's .btn-white (topbar buttons, "Download Page Data", "Customize"). */
+.btn-white {
+  --bs-btn-color: var(--ex-btn-white-color);
+  --bs-btn-bg: var(--ex-btn-white-bg);
+  --bs-btn-border-color: var(--ex-border);
+  --bs-btn-hover-color: var(--ex-btn-white-color);
+  --bs-btn-hover-bg: var(--ex-hover-bg);
+  --bs-btn-hover-border-color: var(--ex-border);
+  --bs-btn-active-color: var(--ex-btn-white-color);
+  --bs-btn-active-bg: var(--ex-hover-bg);
+  --bs-btn-active-border-color: var(--ex-border);
+  --bs-btn-disabled-color: var(--ex-muted);
+  --bs-btn-disabled-bg: var(--ex-soft);
+  --bs-btn-disabled-border-color: var(--ex-border);
+}
+/* Etherscan's .btn-secondary: navy on light grey, not Bootstrap's grey with white text. */
+.btn-secondary {
+  --bs-btn-color: var(--ex-btn-secondary-color);
+  --bs-btn-bg: var(--ex-btn-secondary-bg);
+  --bs-btn-border-color: var(--ex-btn-secondary-bg);
+  --bs-btn-hover-color: var(--ex-btn-secondary-color);
+  --bs-btn-hover-bg: var(--ex-btn-secondary-hover-bg);
+  --bs-btn-hover-border-color: var(--ex-btn-secondary-hover-bg);
+  --bs-btn-active-color: var(--ex-btn-secondary-color);
+  --bs-btn-active-bg: var(--ex-btn-secondary-hover-bg);
+  --bs-btn-active-border-color: var(--ex-btn-secondary-hover-bg);
+  --bs-btn-disabled-color: var(--ex-muted);
+  --bs-btn-disabled-bg: var(--ex-btn-secondary-bg);
+  --bs-btn-disabled-border-color: var(--ex-btn-secondary-bg);
+}
+/* Etherscan's .btn-ghost-white ("Reset" on the tool pages): muted text, grey on hover. */
+.btn-ghost-white {
+  --bs-btn-color: var(--ex-muted);
+  --bs-btn-bg: transparent;
+  --bs-btn-border-color: transparent;
+  --bs-btn-hover-color: var(--ex-text);
+  --bs-btn-hover-bg: var(--ex-hover-bg);
+  --bs-btn-hover-border-color: transparent;
+  --bs-btn-active-color: var(--ex-text);
+  --bs-btn-active-bg: var(--ex-hover-bg);
+  --bs-btn-active-border-color: transparent;
+}
+.btn {
+  --bs-btn-padding-y: 0.3rem;
+  --bs-btn-padding-x: 0.6rem;
+  --bs-btn-font-size: 0.90625rem;
+  --bs-btn-border-radius: 0.5rem;
+}
+.btn-lg {
+  --bs-btn-padding-y: 0.375rem;
+  --bs-btn-padding-x: 0.75rem;
+  --bs-btn-font-size: 0.9375rem;
+  --bs-btn-border-radius: 0.5rem;
+}
+/* Etherscan's small button (Download Page Data, pager-height): 4px 8px, 12.5625px text, 6px corners → 29px tall. */
+.btn-sm {
+  --bs-btn-padding-y: 0.25rem;
+  --bs-btn-padding-x: 0.5rem;
+  --bs-btn-font-size: 0.78515625rem;
+  --bs-btn-border-radius: 0.375rem;
+}
+.form-control,
+.form-select {
+  border-color: var(--ex-border);
+  font-size: 0.90625rem;
+  border-radius: 0.5rem;
+}
+.form-control {
+  padding: 0.3rem 0.6rem;
+}
+.form-select {
+  padding: 0.3rem 1.8rem 0.3rem 0.6rem;
+  --bs-form-select-bg-img: var(--ex-select-chevron);
+}
+.form-control-lg {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.9375rem;
+  border-radius: 0.5rem;
+}
+.form-control:focus,
+.form-select:focus,
+.form-check-input:focus {
+  border-color: var(--ex-focus-border);
+  box-shadow: var(--ex-focus-ring);
+}
+.form-check-input:checked {
+  background-color: var(--ex-primary);
+  border-color: var(--ex-primary);
+}
+[data-bs-theme='dark'] .form-check-input:not(:checked) {
+  border-color: var(--ex-border-strong);
+}
+.nav-pills {
+  --bs-nav-pills-link-active-bg: var(--ex-primary);
+  --bs-nav-pills-link-active-color: var(--ex-on-primary);
+}
+.dropdown-menu {
+  --bs-dropdown-min-width: 10rem;
+  --bs-dropdown-padding-x: 0.5rem;
+  --bs-dropdown-padding-y: 0.5rem;
+  --bs-dropdown-font-size: 0.78515625rem;
+  --bs-dropdown-color: var(--ex-text);
+  --bs-dropdown-bg: var(--ex-surface);
+  --bs-dropdown-border-color: var(--ex-border);
+  --bs-dropdown-border-radius: 0.5rem;
+  --bs-dropdown-inner-border-radius: calc(0.5rem - 1px);
+  --bs-dropdown-box-shadow: var(--ex-menu-shadow);
+  --bs-dropdown-divider-bg: var(--ex-border);
+  --bs-dropdown-divider-margin-y: 0.5rem;
+  --bs-dropdown-link-color: var(--ex-menu-link);
+  --bs-dropdown-link-hover-color: var(--ex-menu-link);
+  --bs-dropdown-link-hover-bg: var(--ex-hover-bg);
+  --bs-dropdown-link-active-color: var(--ex-link);
+  --bs-dropdown-link-active-bg: transparent;
+  --bs-dropdown-link-disabled-color: var(--ex-muted);
+  --bs-dropdown-item-padding-x: 0.75rem;
+  --bs-dropdown-item-padding-y: 0.375rem;
+  --bs-dropdown-header-color: var(--ex-muted);
+  --bs-dropdown-header-padding-x: 0.75rem;
+  --bs-dropdown-header-padding-y: 0.5rem;
+  box-shadow: var(--bs-dropdown-box-shadow);
+}
+.dropdown-item {
+  border-radius: 0.375rem;
+}
+.dropdown-menu li:not(:last-child) {
+  margin-bottom: 0.25rem;
+}
+.dropdown-item-icon {
+  color: var(--ex-icon);
+}
+.tooltip {
+  --bs-tooltip-bg: var(--ex-hero-bg);
+  --bs-tooltip-font-size: 0.78515625rem;
+  --bs-tooltip-opacity: 0.95;
+  --bs-tooltip-max-width: 350px;
+}
+hr {
+  color: var(--ex-border);
+  opacity: 1;
+}
+.link-dark:focus {
+  color: rgba(var(--bs-dark-rgb), var(--bs-link-opacity, 1)) !important;
+}
+.link-dark:hover {
+  color: var(--ex-link) !important;
+}
+
+/* ---------- base ---------- */
+body {
+  background: var(--ex-page);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1 0 auto;
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  color: var(--ex-link-hover);
+}
+.container-xxl {
+  max-width: 1400px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.text-muted,
+.text-secondary {
+  color: var(--ex-muted) !important;
+}
+/* Etherscan's .fs-sm (12.5625px). */
+.fs-sm {
+  font-size: 0.78515625rem;
+}
+.fs-xs {
+  font-size: 0.75rem;
+}
+.font-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.ls-1 {
+  letter-spacing: 0.05em;
+}
+.icon-inline {
+  vertical-align: -0.15em;
+}
+.ex-iconbtn {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--ex-border);
+  border-radius: 0.5rem;
+  background: var(--ex-btn-white-bg);
+  color: var(--ex-text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.ex-iconbtn:hover {
+  color: var(--ex-link);
+}
+.ex-iconbtn.ex-iconbtn-sm {
+  width: 28px;
+  height: 28px;
+  border-radius: 0.375rem;
+}
+
+/* ---------- cards ---------- */
+.card {
+  --bs-card-bg: var(--ex-surface);
+  border: 1px solid var(--ex-border);
+  border-radius: 12px;
+  box-shadow: var(--ex-card-shadow);
+}
+.card-header {
+  background: transparent;
+  border-bottom: 1px solid var(--ex-border);
+  padding: 1rem;
+}
+.card-header:first-child {
+  border-radius: 12px 12px 0 0;
+}
+.card-footer {
+  background: var(--ex-soft);
+  border-top: 1px solid var(--ex-border);
+  text-align: center;
+  padding: 0.75rem;
+  border-radius: 0 0 12px 12px !important;
+}
+
+/* stats strip (address and token overview cards) */
+.ex-stat {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+}
+.ex-stat-icon {
+  color: var(--ex-text);
+  flex: 0 0 auto;
+  margin-top: 0.15rem;
+}
+.ex-stat-label {
+  color: var(--ex-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.ex-stat-value {
+  font-size: 0.95rem;
+}
+
+/* ---------- badges / pills ---------- */
+.ex-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border: 1px solid var(--ex-border);
+  border-radius: 0.375rem;
+  background: var(--ex-soft);
+  color: var(--ex-text);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.12rem 0.45rem;
+  white-space: nowrap;
+}
+.ex-badge-success {
+  background: var(--ex-success-soft);
+  border-color: rgba(var(--ex-success-rgb), 0.35);
+  color: var(--ex-success);
+}
+.ex-badge-danger {
+  background: var(--ex-danger-soft);
+  border-color: rgba(var(--ex-danger-rgb), 0.35);
+  color: var(--ex-danger);
+}
+.ex-badge-warning {
+  background: var(--ex-warning-soft);
+  border-color: var(--ex-warning-line);
+  color: var(--ex-warning);
+}
+/* Method badge: as wide as its column up to 95px, so every row's badge lines up. */
+.ex-method {
+  display: block;
+  width: 100%;
+  max-width: 95px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  border: 1px solid var(--ex-method-border);
+  border-radius: 6px;
+  background: var(--ex-soft);
+  color: var(--ex-method-ink);
+  font-size: 10.875px;
+  font-weight: 400;
+  line-height: 1;
+  padding: 6px 8.16px;
+}
+.ex-inout {
+  display: block;
+  min-width: 27px;
+  text-align: center;
+  border-radius: 6px;
+  font-size: 10.15px;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  padding: 6px 7.6px;
+}
+.ex-in {
+  background: rgba(var(--ex-success-rgb), 0.1);
+  color: var(--ex-success);
+  border: 1px solid rgba(var(--ex-success-rgb), 0.25);
+}
+.ex-out {
+  background: rgba(var(--ex-warning-rgb), 0.15);
+  color: var(--ex-warning);
+  border: 1px solid rgba(var(--ex-warning-rgb), 0.25);
+}
+.ex-self {
+  background: rgba(var(--ex-neutral-rgb), 0.1);
+  color: var(--ex-muted);
+  border: 1px solid rgba(var(--ex-neutral-rgb), 0.25);
+}
+
+.ex-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.ex-pill {
+  position: relative;
+  border-radius: 0.5rem;
+  background: var(--ex-pill-bg);
+  color: var(--ex-dark);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.3rem 0.6rem;
+}
+.ex-pill:hover {
+  color: var(--ex-dark);
+  background: var(--ex-pill-hover-bg);
+}
+.ex-pill.active {
+  background: var(--ex-primary);
+  color: var(--ex-on-primary);
+}
+.ex-pill-check {
+  position: absolute;
+  top: -0.4rem;
+  right: -0.4rem;
+  display: inline-flex;
+  color: var(--ex-success);
+  line-height: 1;
+}
+/* The tick inside the green disc; CSS outranks the icon's own stroke attribute. */
+.ex-pill-check svg {
+  stroke: var(--ex-on-primary);
+}
+
+/* ---------- contract tab (etherscan.io theme.min.css: pre 1rem/.875em/#f8f9fa, .text-cap .75rem .5px) ---------- */
+.ex-contract {
+  padding: 1.25rem;
+}
+.ex-cap,
+.text-cap {
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--ex-muted);
+}
+.ex-segment {
+  display: inline-flex;
+  gap: 0.25rem;
+  padding: 0.125rem;
+  background: var(--ex-pill-bg);
+  border-radius: 0.5rem;
+}
+.ex-segment-item {
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.375rem;
+  font-size: 0.78515625rem;
+  font-weight: 500;
+  color: var(--ex-dark);
+}
+.ex-segment-item.active {
+  background: var(--ex-segment-active);
+  color: var(--ex-text);
+}
+.ex-matchcard {
+  border: 1px solid var(--ex-border);
+  border-radius: 0.75rem;
+  padding: 1rem 1rem 1.25rem;
+}
+.ex-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--ex-border);
+  padding-top: 1.25rem;
+  row-gap: 1rem;
+}
+.ex-meta-col {
+  padding: 0 2rem;
+}
+.ex-meta-col:first-child {
+  padding-left: 0;
+}
+@media (min-width: 992px) {
+  .ex-meta-col + .ex-meta-col {
+    border-left: 1px solid var(--ex-border);
+  }
+}
+.ex-codebox {
+  margin-bottom: 1.5rem;
+}
+.ex-codebox-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.ex-codebox-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.90625rem;
+  font-weight: 500;
+  margin: 0;
+}
+/* "[ Download: CSV Export ]" under a list: 11.6px muted, right-aligned (Etherscan fs-80x text-end). */
+.ex-csv-line {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.15rem;
+  margin: -0.25rem 0 1rem;
+  font-size: 0.725rem;
+  color: var(--ex-muted);
+}
+.ex-pre {
+  background: var(--ex-soft);
+  border: 1px solid var(--ex-border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.875em;
+  height: 200px;
+  overflow: auto;
+  resize: vertical;
+  white-space: pre-wrap;
+  word-break: break-all;
+  margin: 0;
+}
+.ex-pre.ex-pre-open {
+  height: auto;
+  max-height: none;
+  resize: none;
+}
+
+/* multi-file source viewer (Etherscan's IDE box: 550px tall, 250px explorer column) */
+.ex-ide {
+  display: flex;
+  height: 550px;
+  border: 1px solid var(--ex-border);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: var(--ex-surface);
+}
+.ex-ide:fullscreen {
+  height: 100vh;
+  border-radius: 0;
+}
+.ex-ide-side {
+  flex: 0 0 250px;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  background: var(--ex-soft);
+  border-right: 1px solid var(--ex-border);
+  min-height: 0;
+}
+.ex-ide-head {
+  padding: 0.6rem 1rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--ex-text);
+}
+.ex-ide-files {
+  flex: 1 1 auto;
+  overflow: auto;
+  min-height: 0;
+}
+.ex-ide-file,
+.ex-ide-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+  border: 0;
+  background: none;
+  text-align: left;
+  color: var(--ex-text);
+  font-size: 0.8125rem;
+  padding: 0.2rem 1rem;
+  white-space: nowrap;
+}
+.ex-ide-file:hover,
+.ex-ide-item:hover {
+  background: var(--ex-border);
+}
+.ex-ide-file.active {
+  background: var(--ex-border-strong);
+}
+.ex-ide-item {
+  font-size: 0.75rem;
+}
+.ex-ide-sol {
+  color: var(--ex-file-sol);
+  flex: 0 0 auto;
+}
+.ex-ide-json {
+  color: var(--ex-file-json);
+  flex: 0 0 auto;
+}
+.ex-ide-contract {
+  color: var(--ex-file-contract);
+}
+.ex-ide-fn {
+  color: var(--ex-file-fn);
+}
+.ex-ide-outline {
+  flex: 0 0 auto;
+  max-height: 45%;
+  overflow: auto;
+  border-top: 1px solid var(--ex-border);
+  padding-bottom: 0.5rem;
+}
+.ex-ide-group {
+  padding: 0.4rem 1rem 0.2rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--ex-muted);
+}
+.ex-ide-main {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.ex-ide-tabs {
+  display: flex;
+  align-items: center;
+  height: 38px;
+  flex: 0 0 auto;
+  border-bottom: 1px solid var(--ex-border);
+  background: var(--ex-soft);
+}
+.ex-ide-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  height: 100%;
+  padding: 0 1rem;
+  font-size: 0.8125rem;
+  background: var(--ex-surface);
+  border-right: 1px solid var(--ex-border);
+}
+.ex-ide-crumbs {
+  flex: 0 0 22px;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  font-size: 12px;
+  color: var(--ex-muted);
+  white-space: nowrap;
+  overflow: hidden;
+}
+.ex-ide-code {
+  position: relative;
+  flex: 1 1 auto;
+  overflow: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 13px;
+  line-height: 18px;
+  padding: 0.25rem 0;
+}
+.ex-ide-line {
+  display: flex;
+}
+.ex-ide-ln {
+  flex: 0 0 3.5rem;
+  text-align: right;
+  padding-right: 1.25rem;
+  color: var(--ex-code-ln);
+  user-select: none;
+}
+.ex-ide-src {
+  white-space: pre;
+  color: var(--ex-code-text);
+}
+.tk-c {
+  color: var(--ex-code-comment);
+}
+.tk-s {
+  color: var(--ex-code-string);
+}
+.tk-k {
+  color: var(--ex-code-keyword);
+}
+.tk-n {
+  color: var(--ex-code-number);
+}
+
+/* ---------- detail pages ---------- */
+.ex-page-title {
+  font-size: 1.17rem;
+  font-weight: 500;
+  margin: 0;
+}
+.ex-page-head {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--ex-border);
+  margin-bottom: 1.5rem;
+}
+/*
+ * Details cards, measured on etherscan.io/tx (2026-10-31): card padding 20px ("card p-5"); each row is a
+ * Bootstrap row (-12px gutters) with mb 16px, the last one 0; label col-md-3 muted with a 4px gap after the
+ * help icon, value col-md-9, both top-aligned; dividers are #e9ecef at 0.75 opacity, 0 above / 20px below.
+ */
+.ex-dl {
+  padding: 1.25rem;
+}
+.ex-dl-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin: 0 -12px 1rem;
+}
+.ex-dl > .ex-dl-row:last-child,
+.ex-dl-group > .ex-dl-row:last-child {
+  margin-bottom: 0;
+}
+.ex-dl-row > .ex-dt {
+  flex: 0 0 25%;
+  max-width: 25%;
+  padding: 0 12px;
+  color: var(--ex-muted);
+}
+.ex-dl-row > .ex-dt > .ex-help {
+  display: inline-block;
+  margin-right: 4px;
+  vertical-align: -1.5px;
+}
+.ex-dl-row > .ex-dd {
+  flex: 0 0 75%;
+  max-width: 75%;
+  min-width: 0;
+  padding: 0 12px;
+  word-break: break-all;
+}
+@media (max-width: 767.98px) {
+  .ex-dl-row > .ex-dt,
+  .ex-dl-row > .ex-dd {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .ex-dl-row > .ex-dt {
+    margin-bottom: 0.5rem;
+  }
+}
+.ex-hr {
+  border-top: 1px solid var(--ex-border);
+  margin: 0 0 1.25rem;
+  opacity: 0.75;
+}
+.ex-hr.ex-hr-end {
+  margin: 1.25rem 0 0;
+}
+/* "More Details: + Click to show more" — the whole bottom strip of the card is the toggle. */
+.ex-more-toggle {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: none;
+  text-align: left;
+  color: inherit;
+  padding: 1.25rem;
+}
+.ex-more-toggle .ex-more-link {
+  color: var(--ex-link);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.ex-more-toggle:hover .ex-more-link {
+  color: var(--ex-link-hover);
+}
+.ex-copy {
+  border: 0;
+  background: none;
+  color: var(--ex-icon-muted);
+  padding: 0 0.25rem;
+  line-height: 1;
+}
+.ex-copy:hover {
+  color: var(--ex-link-hover);
+}
+
+/* tables */
+.ex-table {
+  width: 100%;
+  margin: 0;
+  font-size: 0.90625rem;
+}
+.ex-table th {
+  font-weight: 700;
+  font-size: 12.5625px;
+  color: var(--ex-text);
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid var(--ex-border);
+  white-space: nowrap;
+}
+.ex-table td {
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid var(--ex-border);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+/* The table sits flush in its card; only the outer cells are padded, 1rem, like Etherscan. */
+.ex-table th:first-child,
+.ex-table td:first-child {
+  padding-left: 1rem;
+}
+.ex-table th:last-child,
+.ex-table td:last-child {
+  padding-right: 1rem;
+}
+.ex-table tbody tr:hover > td {
+  box-shadow: inset 0 0 0 9999px var(--ex-row-hover);
+}
+.ex-table tr:last-child td {
+  border-bottom: 0;
+}
+/* Headers that switch what their column shows (Age, Amount, Txn Fee) or explain it (Action) are blue on Etherscan. */
+.ex-table th.ex-th-link {
+  color: var(--ex-link);
+}
+.ex-table th .ex-help {
+  color: var(--ex-muted);
+  display: inline-flex;
+  vertical-align: -2px;
+}
+.ex-table th.ex-th-icon {
+  width: 28px;
+}
+.ex-table th.ex-th-badge {
+  width: 20px;
+}
+.ex-eye {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--ex-border);
+  border-radius: 6px;
+  background: var(--ex-btn-white-bg);
+  color: var(--ex-text);
+}
+.ex-eye:hover {
+  background: var(--ex-border);
+  color: var(--ex-text);
+}
+.ex-table .ex-copy {
+  padding: 0 0.15rem;
+}
+/* Transaction hashes stay whole in the page (find-in-page, copy) and are cut by CSS. */
+.ex-hash {
+  display: inline-block;
+  max-width: 7rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+/*
+ * An address's hidden middle: still in the page text (find-in-page and copy get the whole address), drawn as one
+ * "…". The middle's own font size is 0, so the "…" takes its size from --addr-fs; registered as a <length>, the
+ * "1em" below resolves on the address text itself and is inherited as pixels, whatever size the address is set in.
+ */
+@property --addr-fs {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 14.5px;
+}
+.ex-addr-text {
+  --addr-fs: 1em;
+}
+.ex-mid {
+  font-size: 0;
+  letter-spacing: -1em;
+}
+.ex-mid::before {
+  content: '\2026';
+  font-size: var(--addr-fs);
+  letter-spacing: normal;
+}
+.ex-contract-icon {
+  color: var(--ex-icon-muted);
+  display: inline-flex;
+  align-items: center;
+}
+.ex-fee {
+  font-size: 0.875em;
+  color: var(--ex-muted);
+}
+.ex-token-name {
+  display: inline-block;
+  max-width: 7rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+/* Empty list: the header row stays, the body is one cell holding the inbox circle. */
+.ex-table td.ex-empty-cell {
+  padding: 0;
+  border: 0;
+  white-space: normal;
+}
+.ex-table tbody tr:hover > td.ex-empty-cell {
+  box-shadow: none;
+}
+.ex-empty {
+  text-align: center;
+  padding: 6rem 0;
+}
+.ex-empty-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background: rgba(var(--ex-warning-rgb), 0.1);
+  border: 1px solid rgba(var(--ex-warning-rgb), 0.25);
+  color: var(--ex-warning);
+  margin-bottom: 1rem;
+}
+.ex-empty-title {
+  font-size: 1.171875rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+/* Green circled arrow between From and To. */
+.ex-flow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--ex-success-soft);
+  border: 1px solid rgba(var(--ex-success-rgb), 0.25);
+  color: var(--ex-success);
+}
+.ex-table-wrap {
+  overflow-x: auto;
+}
+
+/* List header line: a plain card-body-like block, no border under it (the thead draws the line). 61px with a button. */
+.card-header.ex-list-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  border-bottom: 0;
+  padding: 1rem;
+  min-height: 61px;
+}
+.ex-list-info {
+  font-size: 0.90625rem;
+  color: var(--ex-text);
+}
+.ex-list-info .ex-list-sub {
+  display: block;
+  color: var(--ex-muted);
+  font-size: 0.875em;
+}
+/* Paged list footer: "Show N Records" left, pager right; white, unlike the home cards' grey "View all" footers. */
+.card-footer.ex-list-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: var(--ex-surface);
+  text-align: left;
+  padding: 1rem;
+  font-size: 0.78515625rem;
+}
+.card-footer.ex-viewall {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 1rem;
+  background: var(--ex-soft);
+  color: var(--ex-muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.card-footer.ex-viewall:hover {
+  color: var(--ex-link-hover);
+}
+.ex-size-select {
+  width: auto;
+  font-size: 0.78515625rem;
+  padding: 4px 1.8rem 4px 8px;
+  border-color: var(--ex-border);
+  border-radius: 6px;
+  background-position: right 0.6rem center;
+}
+/* Etherscan's .pagination-sm: separate items, 6px radius each, 4px apart. */
+.ex-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+}
+.ex-page-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 29px;
+  padding: 4px 8px;
+  font-size: 0.78515625rem;
+  line-height: 1.5;
+  border: 1px solid var(--ex-border);
+  border-radius: 6px;
+  background: var(--ex-surface);
+  color: var(--ex-link);
+  white-space: nowrap;
+}
+a.ex-page-link:hover {
+  background: var(--ex-primary);
+  border-color: var(--ex-primary);
+  color: var(--ex-on-primary);
+}
+.ex-page-link.disabled {
+  color: var(--ex-muted);
+  background: var(--ex-soft);
+  pointer-events: none;
+}
+.ex-page-link svg {
+  margin: 0 4px;
+}
+
+.ex-code {
+  background: var(--ex-soft);
+  border: 1px solid var(--ex-border);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.8rem;
+  max-height: 22rem;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.ex-note {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  color: var(--ex-muted);
+  font-size: 0.78515625rem;
+  margin: 1rem 0 2.5rem;
+}
+.ex-note svg {
+  flex: none;
+  align-self: center;
+}

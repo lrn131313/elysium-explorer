@@ -1,0 +1,121 @@
+/*
+ * Transaction page extras, after robin.etherscan.io/tx (2026-11-01 screenshots): the "TRANSACTION ACTION" card is
+ * its own card above the details, a 40px round icon beside an uppercase title and one wrapping line.
+ */
+.ex-action {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+}
+.ex-action-icon {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ex-soft);
+  border: 1px solid var(--ex-border);
+  color: var(--ex-muted);
+}
+.ex-action-text {
+  min-width: 0;
+}
+.ex-action-title {
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 2px;
+}
+.ex-action-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 0.35rem;
+  row-gap: 0.25rem;
+}
+/* The "All Transfers / Net Transfers" switch above a transfer list (robin.etherscan.io/tx). */
+.ex-tview {
+  display: inline-flex;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+.ex-tview-btn {
+  border: 1px solid var(--ex-border);
+  border-radius: 6px;
+  background: var(--ex-pill-bg);
+  color: var(--ex-text);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 3px 10px;
+}
+.ex-tview-btn.active {
+  background: var(--ex-primary);
+  border-color: var(--ex-primary);
+  color: var(--ex-on-primary);
+}
+/* A transaction's internal / token transfer lines on the Overview: one wrapping row each, a caret in front. */
+.ex-tlist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.ex-tlist > li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.35rem;
+  padding: 2px 0;
+}
+.ex-tline-caret {
+  color: var(--ex-muted);
+  flex: none;
+}
+.ex-net-in {
+  color: var(--ex-success);
+  font-weight: 500;
+}
+.ex-net-out {
+  color: var(--ex-danger);
+  font-weight: 500;
+}
+/* Etherscan's small grey count beside a label ("ERC-20 Tokens Transferred: (2)"). */
+.ex-count-badge {
+  display: inline-block;
+  margin-left: 6px;
+  border-radius: 10px;
+  background: var(--ex-soft);
+  border: 1px solid var(--ex-border);
+  color: var(--ex-muted);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 1px 7px;
+}
+
+/* A trade's fees under its action line (not on Etherscan): smaller, the label muted. */
+.ex-action-fees {
+  margin-top: 4px;
+  font-size: 0.8125rem;
+}
+.ex-action-fees-label {
+  color: var(--ex-muted);
+}
+/* The method in the line, as Etherscan's small bordered badge (the lists' badge is a fixed-width block). */
+.ex-action-method {
+  display: inline-block;
+  max-width: 14rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+  border: 1px solid var(--ex-method-border);
+  border-radius: 6px;
+  background: var(--ex-soft);
+  color: var(--ex-method-ink);
+  font-size: 10.875px;
+  line-height: 1;
+  padding: 5px 7px;
+}

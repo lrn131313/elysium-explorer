@@ -1,0 +1,110 @@
+# Elysium explorer stack. Fixed project + volume names so the folder can move without losing synced data.
+# Everything binds to 127.0.0.1 only.
+name: elysium-explorer
+
+services:
+  # Sticky-failover front for the HyperEVM RPCs the node reads batches from (node/parent-proxy/proxy.mjs).
+  explorer-parent-proxy:
+    image: node:22-alpine@sha256:fe4f6d74e20370acb04ad889077d14d0f64a9c8ea6a42bc60cddf1e844699914
+    container_name: explorer-parent-proxy
+    restart: unless-stopped
+    command: ["node", "/app/proxy.mjs"]
+    environment:
+      UPSTREAMS: ${PARENT_UPSTREAMS:?PARENT_UPSTREAMS is required, see node/.env}
+      PORT: "8545"
+    volumes:
+      - ./node/parent-proxy/proxy.mjs:/app/proxy.mjs:ro
+    ports:
+      - "127.0.0.1:9555:8545" # status page: curl http://127.0.0.1:9555
+    logging:
+      driver: json-file
+      options: { max-size: "10m", max-file: "3" }
+
+  # The explorer's own archive node with the debug API (internal transactions).
+  explorer-node:
+    build:
+      context: ./node
+    image: elysium-explorer-node:local
+    container_name: explorer-node
+    platform: linux/arm64
+    restart: unless-stopped
+    depends_on:
+      - explorer-parent-proxy
+    env_file: ./node/.env
+    # Nitro flushes its database on shutdown: give it time instead of killing it
+    stop_grace_period: 5m
+    ports:
+      - "127.0.0.1:9547:8547"
+      - "127.0.0.1:9546:8546"
+      - "127.0.0.1:9070:6070"
+    volumes:
+      - explorer-node-data:/home/user/.arbitrum
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - >-
+          curl -sf -X POST -H 'Content-Type: application/json'
+          --data '{"jsonrpc":"2.0","id":1,"method":"eth_blockNumber","params":[]}'
+          http://127.0.0.1:8547 | grep -q result
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5m
+    logging:
+      driver: json-file
+      options: { max-size: "50m", max-file: "5" }
+
+  # Blockscout's database. Not published to the host.
+  explorer-db:
+    image: postgres:17-alpine@sha256:266d3c257594e195b309ae9d1805e54c788f1d7b375f56bf6c367aac6c917e7b
+    container_name: explorer-db
+    restart: unless-stopped
+    shm_size: 256m
+    command: postgres -c max_connections=200 -c client_connection_check_interval=60000
+    environment:
+      POSTGRES_DB: blockscout
+      POSTGRES_USER: blockscout
+    env_file: ./backend/secrets.env # POSTGRES_PASSWORD
+    volumes:
+      - explorer-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U blockscout -d blockscout"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    logging:
+      driver: json-file
+      options: { max-size: "10m", max-file: "3" }
+
+  # Blockscout indexer + API v2, built from source (backend/src = tag v12.0.3, CHAIN_TYPE=arbitrum).
+  # See README "Rebuild the backend image".
+  explorer-backend:
+    image: elysium-explorer-blockscout:12.0.3-arbitrum
+    container_name: explorer-backend
+    restart: unless-stopped
+    stop_grace_period: 5m
+    depends_on:
+      explorer-db:
+        condition: service_healthy
+      explorer-node:
+        condition: service_started
+    command: sh -c "bin/blockscout eval \"Elixir.Explorer.ReleaseTasks.create_and_migrate()\" && bin/blockscout start"
+    env_file:
+      - ./backend/blockscout.env
+      - ./backend/secrets.env # DATABASE_URL, SECRET_KEY_BASE
+    ports:
+      - "127.0.0.1:4010:4000" # API: http://127.0.0.1:4010/api/v2/
+    volumes:
+      - explorer-backend-dets:/app/dets
+    logging:
+      driver: json-file
+      options: { max-size: "50m", max-file: "5" }
+
+volumes:
+  explorer-node-data:
+    name: elysium-explorer-node-data
+  explorer-db-data:
+    name: elysium-explorer-db-data
+  explorer-backend-dets:
+    name: elysium-explorer-backend-dets

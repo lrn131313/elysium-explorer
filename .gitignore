@@ -1,0 +1,18 @@
+# dependencies / build output
+web/node_modules/
+web/.next/
+web/tsconfig.tsbuildinfo
+web/next-env.d.ts
+
+# vendored upstream engine — fetch from the v12.0.3 tag (see SETUP.md)
+backend/src/
+
+# real env files — each has a committed .example; copy it and fill in your own values
+.env
+node/.env
+web/.env.local
+backend/secrets.env
+
+# local tooling
+.playwright-mcp/
+.DS_Store

@@ -1,0 +1,146 @@
+/* lists team styles. Colours only through var(--ex-*) so the light/dim/dark themes apply (see TEAM.md). */
+
+/* Etherscan's hover highlight (bg-warning bg-opacity-15 + dashed border-warning); Bootstrap's warning is the same in every theme. */
+:root,
+[data-ex-theme='dim'],
+[data-ex-theme='dark'] {
+  --lists-hl-bg: rgba(255, 193, 7, 0.15);
+  --lists-hl-border: #ffc107;
+}
+
+/*
+ * Every highlightable value (data-hl, see components/chrome-highlight.tsx) always carries an invisible border and
+ * a padding its negative margin cancels, so outlining it on hover moves nothing. Method badges have their own border.
+ */
+[data-hl]:not(.ex-method) {
+  border: 1px solid transparent;
+  border-radius: 0.375rem;
+  padding: 0 0.25rem;
+  margin: 0 -0.25rem;
+}
+[data-hl].ex-hl-on {
+  background: var(--lists-hl-bg);
+  border: 1px dashed var(--lists-hl-border);
+}
+
+/*
+ * Switchable columns (TEAM.md §3 "Display preferences"). Every cell holds both variants; <html data-ex-age|amount|fee>
+ * picks one. Without the attribute the first variant shows (Age, Amount, Txn Fee), as on Etherscan's first visit.
+ * !important: the hidden variant must stay hidden whatever display a utility class gives it.
+ */
+html:not([data-ex-age='datetime']) .ex-v-datetime,
+html[data-ex-age='datetime'] .ex-v-age,
+html:not([data-ex-amount='usd']) .ex-v-usd,
+html[data-ex-amount='usd'] .ex-v-amount,
+html:not([data-ex-fee='gasprice']) .ex-v-gasprice,
+html[data-ex-fee='gasprice'] .ex-v-fee {
+  display: none !important;
+}
+
+/* Blocks list Gas Used bar: Etherscan's 2px .progress; primary, orange from half full, red when nearly full. */
+:root,
+[data-ex-theme='dim'],
+[data-ex-theme='dark'] {
+  --lists-orange: #fd7e14;
+}
+.ex-gas-bar {
+  height: 2px;
+  margin-top: 0.25rem;
+  background: var(--ex-border);
+  border-radius: 50rem;
+  overflow: hidden;
+}
+.ex-gas-fill {
+  height: 100%;
+  background: var(--ex-primary);
+}
+.ex-gas-fill.ex-gas-mid {
+  background: var(--lists-orange);
+}
+.ex-gas-fill.ex-gas-high {
+  background: var(--ex-danger);
+}
+
+/* Stat cards above /txs (Etherscan: a.card.group.link-dark > .card-body, h6.text-cap, span.fs-5, hover-only arrow). */
+.ex-stat,
+.ex-stat:hover {
+  color: var(--ex-text);
+}
+.ex-stat-value {
+  font-size: 1.171875rem;
+}
+.ex-stat-arrow {
+  color: var(--ex-muted);
+  opacity: 0;
+}
+.ex-stat:hover .ex-stat-arrow {
+  opacity: 1;
+}
+
+/* Token Tracker (/tokens): muted rank, sort arrow on the active column, truncated name. Token logos (24px there, 18px in
+   transfer lists) are round; without an icon the token's first letter stands in, sized by TokenLogo. */
+.ex-table .ex-th-rank {
+  width: 1%;
+  color: var(--ex-muted);
+  text-align: center;
+}
+.ex-sort-icon {
+  color: var(--ex-muted);
+  margin-right: 0.25rem;
+  vertical-align: -1px;
+}
+.ex-token-logo {
+  flex: none;
+  border-radius: 50%;
+}
+.ex-token-logo-blank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ex-soft);
+  border: 1px solid var(--ex-border);
+  color: var(--ex-muted);
+  font-weight: 600;
+  line-height: 1;
+}
+.ex-token-list-name {
+  max-width: 18rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* The /tokens search: a magnifier button whose panel (Etherscan's dropdown-menu-sm-end, min 20rem) opens under it, right-aligned. */
+.ex-token-search {
+  position: relative;
+}
+.ex-token-search > summary {
+  list-style: none;
+}
+.ex-token-search > summary::-webkit-details-marker {
+  display: none;
+}
+.ex-token-search-panel {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  right: 0;
+  z-index: 1000;
+  min-width: 20rem;
+  padding: 0.5rem;
+  border: 1px solid var(--ex-border);
+  border-radius: 0.5rem;
+  box-shadow: var(--ex-card-shadow);
+}
+
+/* The blue header that switches its column: a link-looking button (the th carries the blue). */
+.ex-th-toggle {
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  white-space: nowrap;
+}
+.ex-th-toggle:hover {
+  color: var(--ex-primary-hover);
+}

@@ -1,0 +1,253 @@
+/* tools team styles. Colours only through var(--ex-*) so the light/dim/dark themes apply (see TEAM.md). */
+
+/*
+ * The developer tools layout (/exportData, /unitconverter, /opcode-tool, /inputdatadecoder, /balancecheck-tool,
+ * /pushTx), measured from etherscan.io's tool pages and theme.min.css (2026-10, chrome.md §3.0). Etherscan's spacing
+ * scale is .25rem per step (its mb-5 is 1.25rem, Bootstrap's is 3rem), so the sizes are written out here rather than
+ * borrowed from Bootstrap's numbered utilities.
+ */
+:root {
+  /* .nav-pills-flush .nav-link: #081D35 text; active and hover #dee2e6 (dark/dim: gray-400 text, gray-700 active, gray-500 hover). */
+  --tools-nav-color: #081d35;
+  --tools-nav-active-bg: #dee2e6;
+  --tools-nav-hover-bg: #dee2e6;
+}
+[data-ex-theme='dim'] {
+  --tools-nav-color: #93a3b8;
+  --tools-nav-active-bg: #273343;
+  --tools-nav-hover-bg: #47566a;
+}
+[data-ex-theme='dark'] {
+  --tools-nav-color: #bbb;
+  --tools-nav-active-bg: #222;
+  --tools-nav-hover-bg: #333;
+}
+
+/* div.container-xxl.pt-5.pb-20 > .row.gx-lg-8.gx-xl-16 */
+.tl-body {
+  padding-bottom: 5rem;
+}
+@media (min-width: 992px) {
+  .tl-row {
+    --bs-gutter-x: 2rem;
+  }
+}
+@media (min-width: 1200px) {
+  .tl-row {
+    --bs-gutter-x: 4rem;
+  }
+}
+
+/* aside.col-lg-3.col-xxl-2.border-lg-end.mb-4 */
+.tl-aside {
+  margin-bottom: 1rem;
+}
+@media (min-width: 992px) {
+  .tl-aside {
+    border-right: 1px solid var(--ex-border);
+  }
+}
+/* The menu folds behind the "Tools Menu" button below 992px and stays open, sticky under the header, above it. */
+.tl-menu {
+  display: none;
+}
+.tl-menu.open {
+  display: block;
+}
+@media (min-width: 992px) {
+  .tl-menu {
+    display: block;
+    position: sticky;
+    top: 4.5rem;
+  }
+}
+/* ul.nav.nav-pills.nav-pills-flush.flex-column.w-100.gap-1 > li > a.nav-link.fw-medium.py-2.px-3 */
+.tl-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.tl-nav-link {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  color: var(--tools-nav-color);
+}
+.tl-nav-link:hover {
+  color: var(--tools-nav-color);
+  background: var(--tools-nav-hover-bg);
+}
+.tl-nav-link.active {
+  background: var(--tools-nav-active-bg);
+}
+/* hr.my-3 between the groups */
+.tl-nav-sep {
+  margin: 0.75rem 0;
+  border-top: 1px solid var(--ex-border);
+  opacity: 1;
+}
+
+/* div.mb-5 > h2.fs-default + p */
+.tl-intro {
+  margin-bottom: 1.25rem;
+}
+.tl-title {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 0 0 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.tl-intro p {
+  margin-bottom: 0;
+}
+/* span.badge.border.bg-white.text-dark.fw-medium beside "Input Data Decoder" */
+.tl-beta {
+  display: inline-block;
+  padding: 0.25em 0.75em;
+  font-size: 0.75em;
+  font-weight: 500;
+  line-height: 1;
+  border: 1px solid var(--ex-border);
+  border-radius: 0.375rem;
+  color: var(--ex-text);
+  background: var(--bs-body-bg);
+}
+
+/* div.card.shadow-none > .card-body (1rem) + .card-footer.d-flex.gap-2.bg-light (1rem) */
+.tl-card {
+  box-shadow: none;
+  margin-bottom: 0.75rem;
+}
+.tl-card > .card-body {
+  padding: 1rem;
+}
+.tl-card > .card-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  text-align: left;
+}
+.tl-card + .tl-card {
+  margin-top: 1rem;
+}
+/* Etherscan's form controls: .3rem .6rem padding at .9062rem (Bootstrap's own are .375rem .75rem at 1rem). */
+.tl-card .form-control,
+.tl-card .form-select,
+.tl-card .input-group-text {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.90625rem;
+}
+.tl-card .form-select {
+  padding-right: 1.8rem;
+}
+.tl-card .input-group-text {
+  background: var(--ex-soft);
+}
+.tl-card textarea.form-control {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.8125rem;
+}
+/* .row.gy-4.mb-4: one field per row, 1rem apart */
+.tl-field {
+  margin-bottom: 1rem;
+}
+.tl-field:last-child {
+  margin-bottom: 0;
+}
+/* .btn.px-4 in the footer; Etherscan's .btn-ghost-white for Reset (#6c757d text, #e9ecef on hover) */
+.tl-btn {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.tl-ghost {
+  --bs-btn-color: var(--ex-muted);
+  --bs-btn-bg: transparent;
+  --bs-btn-border-color: transparent;
+  --bs-btn-hover-color: var(--ex-muted);
+  --bs-btn-hover-bg: var(--ex-border);
+  --bs-btn-hover-border-color: var(--ex-border);
+  --bs-btn-active-color: var(--ex-muted);
+  --bs-btn-active-bg: var(--ex-border);
+  --bs-btn-active-border-color: var(--ex-border);
+}
+/* Unit Converter: the unit names after each field, at least 6.5rem wide so the fields line up. */
+.tl-unit {
+  min-width: 6.5rem;
+}
+/* A result card's heading and its monospace output (opcode listing, decoded values). */
+.tl-result-title {
+  font-size: 0.90625rem;
+  font-weight: 500;
+  margin: 0 0 0.5rem;
+}
+.tl-output {
+  background: var(--ex-soft);
+  border: 1px solid var(--ex-border);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.8125rem;
+  color: var(--ex-text);
+  max-height: 40rem;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+/* p.fs-sm.text-muted: tips under a field */
+.tl-tip {
+  font-size: 0.78515625rem;
+  color: var(--ex-muted);
+  margin: 0.5rem 0 0;
+}
+
+/* Input Data Decoder: the radio group's legend reads like a form label; the decoded call's lines and parameter table. */
+.tl-legend {
+  font-size: inherit;
+  float: none;
+  width: auto;
+  margin-bottom: 0.5rem;
+}
+.tl-call {
+  margin-bottom: 0.25rem;
+}
+.tl-params {
+  border-top: 1px solid var(--ex-border);
+}
+.ex-table td.tl-data {
+  white-space: pre-wrap;
+  word-break: break-all;
+  min-width: 16rem;
+}
+
+/*
+ * Account Balance Checker: the token field shows for "Token (ERC-20)" only, and the date or the block field after the
+ * "Filter by" choice; plain CSS, so the form needs no script (a browser without :has shows every field).
+ */
+.tl-balance:has(#bal-kind option[value='coin']:checked) .tl-token-field,
+.tl-balance:has(#bal-by-block:checked) .tl-by-date,
+.tl-balance:has(#bal-by-date:checked) .tl-by-block {
+  display: none;
+}
+/* The result's label/value rows. */
+.tl-dl {
+  margin-bottom: 0;
+}
+.tl-dl dt {
+  font-weight: 400;
+  color: var(--ex-muted);
+}
+.tl-dl dd {
+  margin-bottom: 0.75rem;
+}
+.tl-dl dd:last-child {
+  margin-bottom: 0;
+}

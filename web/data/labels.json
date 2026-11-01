@@ -1,0 +1,53 @@
+{
+  "_about": "Name tags for Elysium (chain 99901) addresses, shown in place of the hash like Etherscan's name tags. Hand-curated from the owner's own on-chain research (Elysium/trading app - pre mainnet/research/launchpads/*.md, snapshot 2026-10-23, addresses checked with eth_call factory()/WETH9()). Entries with kind 'v3-factory' also get every pool they created named automatically (lib/labels.ts). Addresses are lower-case. Do not add an address unless a source confirms it.",
+  "labels": [
+    { "address": "0x5afe876a625a6fe230dd361b9a5bef8e9bea6fe3", "name": "ElysPump: Launchpad", "project": "ElysPump" },
+    { "address": "0x367f85886af509e364c8190862bc714555fefc3e", "name": "ElysPump: V3 Factory", "project": "ElysPump", "kind": "v3-factory" },
+    { "address": "0x10c2b8f290f90f373b9b86c14cdf532367d1a22e", "name": "ElysPump: Swap Router", "project": "ElysPump" },
+    { "address": "0x3e6158ef8ee2087b210a59939a1fff6d20c3dd7e", "name": "ElysPump: QuoterV2", "project": "ElysPump" },
+    { "address": "0xba876237b0f021a6c6d852d6c26e107997cc5e81", "name": "ElysPump: WHYPE", "project": "ElysPump" },
+    { "address": "0x892e4ec4e6ede01e2159eccbcdd409d8df8d68d5", "name": "ElysPump: Admin", "project": "ElysPump" },
+    { "address": "0xd380d23a4d4a80b588d3c6c6b5d5517dff55ec68", "name": "ElysPump: V2 Factory", "project": "ElysPump" },
+    { "address": "0x3320b5685c1c4a0d2a5b0ca30dcee095142bf076", "name": "ElysPump: V2 Router", "project": "ElysPump" },
+    { "address": "0x5fb015a49f5b35073f9ce01c2adb287a75f89600", "name": "ElysPump: V4 PoolManager", "project": "ElysPump" },
+    { "address": "0x751cefb96ac88db5327d39e0fbdd5d882d80b430", "name": "ElysPump: Universal Router", "project": "ElysPump" },
+
+    { "address": "0x56f810328a4e42e983f7f487f34776680d6cd7ab", "name": "BOXA: Launchpad (genesis)", "project": "BOXA" },
+    { "address": "0xe83aabbd2e326ceaae3bdcb605b3af94ac3cf883", "name": "BOXA: V3 Factory (genesis)", "project": "BOXA", "kind": "v3-factory" },
+    { "address": "0x3398765165b9aebf317036bf922f95f9bc6613c0", "name": "BOXA: Swap Router (genesis)", "project": "BOXA" },
+    { "address": "0x93900d707a3b283ccd2e998d233d2db6a326b73f", "name": "BOXA: QuoterV2 (genesis)", "project": "BOXA" },
+    { "address": "0xa27c79491bac6e20e2b18c0b21feb8dedd8caa41", "name": "BOXA: WHYPE", "project": "BOXA" },
+    { "address": "0xd5a7c10820446c58868a204b8979b8cc9cb2a1a3", "name": "BOXA: V3 Factory", "project": "BOXA", "kind": "v3-factory" },
+    { "address": "0x03c820b17f17ea86449f6cf700788c97511566c4", "name": "BOXA: Swap Router", "project": "BOXA" },
+    { "address": "0x4f7dc08e8cc4579763bdec97dd9753086e4f1e3f", "name": "BOXA: QuoterV2", "project": "BOXA" },
+    { "address": "0xf77ba28e57ae5c12edbe213a4aa6c9ddf2ca4795", "name": "BOXA: Position Manager", "project": "BOXA" },
+    { "address": "0x3c4b2494f93679cc8ba04f44ecff28ac0b586985", "name": "BOXA: Locker", "project": "BOXA" },
+    { "address": "0x3e9934196162773be7b8f840a650bfd0d8b188eb", "name": "BOXA: Fee Manager", "project": "BOXA" },
+    { "address": "0x074142858d2501b24bdf35f5c30094a5c206f4fc", "name": "BOXA: Multicall", "project": "BOXA" },
+
+    { "address": "0xe235028fb32cf2ea0577729f7613f504ee7e8888", "name": "Chainzy: Launch Factory v1", "project": "Chainzy" },
+    { "address": "0x29e30681d02295b59106baae3e42a0e4a8a48888", "name": "Chainzy: Launch Factory v2", "project": "Chainzy" },
+    { "address": "0xea9ccd7d93f75a2a567d418be14d573e12e58888", "name": "Chainzy: Launch Factory v2 (2nd)", "project": "Chainzy" },
+    { "address": "0x4f6cf2793119141c886544a4bca617ec906635b1", "name": "Chainzy: V3 Factory v1", "project": "Chainzy", "kind": "v3-factory" },
+    { "address": "0xc098a2ee0cd4292751b4f7cfbb63e89207d45615", "name": "Chainzy: V3 Factory v2", "project": "Chainzy", "kind": "v3-factory" },
+    { "address": "0x3e37b125e6e377ed6303195173be92b2268bfa94", "name": "Chainzy: Swap Router v1", "project": "Chainzy" },
+    { "address": "0xf7a3e4c5951848dccf73a1e5ffb9b54b7c2524d9", "name": "Chainzy: Swap Router v2", "project": "Chainzy" },
+    { "address": "0xd6f165cedaca0cc121133865797df8f35d80113f", "name": "Chainzy: QuoterV2 v1", "project": "Chainzy" },
+    { "address": "0x74fd5bdd704715f2d3e0778e6e76747734a4270e", "name": "Chainzy: QuoterV2 v2", "project": "Chainzy" },
+    { "address": "0xb82bbf54ffa5bd83d983f69ab36e3a859ba58888", "name": "Chainzy: Launch Router", "project": "Chainzy" },
+    { "address": "0xcc2ed94933fe99621ff5b0dfdaa3954874d28888", "name": "Chainzy: Launch Router 2", "project": "Chainzy" },
+
+    { "address": "0x450fa91b21971c605abe31ee479d46cb1182dd7b", "name": "SuperColony: Launchpad", "project": "SuperColony" },
+    { "address": "0x9f9169a859a940882452449db0f041c426d907b6", "name": "SuperColony: V3 Factory", "project": "SuperColony", "kind": "v3-factory" },
+    { "address": "0xaeb7ede82165bb12ea5c0c80ce8c0a0d05bce6af", "name": "SuperColony: WHYPE", "project": "SuperColony" },
+    { "address": "0x56e8d64eff33cc352406e28360229013bafbd52d", "name": "SuperColony: Fee Recipient", "project": "SuperColony" },
+
+    { "address": "0x4f66184a9ffabb7f7071d590c2c48dedf41676f4", "name": "StockiumSwap: V3 Factory", "project": "StockiumSwap", "kind": "v3-factory" },
+    { "address": "0x0269031ace34a7821e9d9980d087c35ce7c19eef", "name": "FluxSwap: WHYPE", "project": "FluxSwap" },
+
+    { "address": "0xca11bde05977b3631167028862be2a173976ca11", "name": "Multicall3", "project": "Multicall3" },
+    { "address": "0x0000000000000000000000000000000000000000", "name": "Null: 0x000…000", "project": "Null" },
+    { "address": "0x000000000000000000000000000000000000dead", "name": "Null: 0x000…dEaD", "project": "Null", "_source": "the conventional burn address (no known key); 4,032 token transfers into it on Elysium as of 2026-11-01" },
+    { "address": "0x00000000000000000000000000000000000a4b05", "name": "Arbitrum: ArbOS", "project": "Arbitrum", "_source": "Nitro's fixed ArbOS address; sender and receiver of every block's startBlock system tx; Arbiscan names it the same" }
+  ]
+}

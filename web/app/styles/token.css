@@ -1,0 +1,539 @@
+/* token team styles. Colours only through var(--ex-*) so the light/dim/dark themes apply (see TEAM.md). */
+
+/*
+ * Own colours (research/token.md §1.8: Etherscan's chart palette, the no-price notice, the analytics switch).
+ * Dim and dark values follow chrome.md §1.2-1.4 (gray scales of those themes).
+ */
+:root {
+  --tk-c1: #004fee;
+  --tk-c2: #37d1fe;
+  --tk-c3: #ff7c62;
+  --tk-c4: #5e93ff;
+  --tk-c5: #a967ff;
+  --tk-c6: #dde2e6;
+  --tk-tier: #0f57ff;
+  --tk-depth: #1abc9c;
+  --tk-alert-bg: #e9ecef;
+  --tk-alert-border: #dee2e6;
+  --tk-alert-text: #495057;
+  --tk-seg-bg: #e9ecef;
+  --tk-seg-active: #fff;
+  --tk-seg-active-text: #212529;
+  --tk-emphasis: #000;
+  --tk-track: #e9ecef;
+  --tk-pill-border: rgba(8, 29, 53, 0.15);
+  --tk-menu-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+[data-ex-theme='dim'] {
+  --tk-c6: #3a4759;
+  --tk-alert-bg: #1e2938;
+  --tk-alert-border: #273343;
+  --tk-alert-text: #cbd5e1;
+  --tk-seg-bg: #273343;
+  --tk-seg-active: #111a2e;
+  --tk-seg-active-text: #e3e9f1;
+  --tk-emphasis: #fff;
+  --tk-track: #273343;
+  --tk-pill-border: rgba(227, 233, 241, 0.2);
+  --tk-menu-shadow: 0 0.5rem 1rem rgba(82, 85, 92, 0.2);
+}
+[data-ex-theme='dark'] {
+  --tk-c6: #333;
+  --tk-alert-bg: #181818;
+  --tk-alert-border: #222;
+  --tk-alert-text: #ccc;
+  --tk-seg-bg: #222;
+  --tk-seg-active: #111;
+  --tk-seg-active-text: #f5f5f5;
+  --tk-emphasis: #fff;
+  --tk-track: #222;
+  --tk-pill-border: rgba(245, 245, 245, 0.2);
+  --tk-menu-shadow: 0 0.5rem 1rem rgba(82, 85, 92, 0.2);
+}
+
+.tk-min0 {
+  min-width: 0;
+}
+.tk-help {
+  color: var(--ex-muted);
+  display: inline-flex;
+  align-items: center;
+  cursor: help;
+}
+
+/* ---------- header, badges row, cards (token.md §1.2-1.4) ---------- */
+.tk-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--ex-border);
+}
+.tk-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ex-border);
+  color: var(--ex-muted);
+  object-fit: cover;
+}
+.tk-name {
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+.tk-profile {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.25rem 0 0.75rem;
+}
+.tk-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 50rem;
+  padding: 0.375rem 0.5rem;
+  font-size: 0.75em;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  background: var(--ex-page);
+  border: 1px solid var(--tk-pill-border);
+  color: var(--ex-text);
+}
+.tk-pill-success {
+  background: var(--ex-success-soft);
+  border-color: color-mix(in srgb, var(--ex-success) 25%, transparent);
+  color: var(--ex-success);
+  cursor: help;
+}
+.tk-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.tk-card-title {
+  font-size: 0.90625rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* ---------- dropdowns: the list menu and the tab-row filter ---------- */
+.tk-dropdown {
+  position: relative;
+  display: inline-block;
+}
+.tk-menu-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.tk-search-btn {
+  --bs-btn-bg: var(--ex-border);
+  --bs-btn-border-color: var(--ex-border);
+  --bs-btn-color: var(--ex-dark);
+  --bs-btn-hover-bg: var(--ex-border);
+  --bs-btn-hover-border-color: var(--ex-border);
+  --bs-btn-hover-color: var(--ex-primary);
+  --bs-btn-active-bg: var(--ex-border);
+  --bs-btn-active-border-color: var(--ex-border);
+  --bs-btn-active-color: var(--ex-primary);
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.6rem;
+}
+.tk-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  z-index: 1000;
+  min-width: 12rem;
+  padding: 0.5rem;
+  font-size: 0.78515625rem;
+  background: var(--ex-page);
+  border: 1px solid var(--ex-border);
+  border-radius: 0.5rem;
+  box-shadow: var(--tk-menu-shadow);
+}
+.tk-dropdown-end {
+  right: 0;
+}
+.tk-dropdown-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: none;
+  color: var(--ex-text);
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.375rem;
+  white-space: nowrap;
+}
+.tk-dropdown-item:hover {
+  background: var(--ex-border);
+}
+.tk-dropdown-status {
+  color: var(--ex-muted);
+  padding: 0.375rem 0.75rem 0.125rem;
+  max-width: 18rem;
+}
+.tk-filter-menu {
+  padding: 0.75rem;
+}
+.tk-filter-menu input {
+  min-width: 20rem;
+}
+@media (max-width: 575.98px) {
+  .tk-filter-menu input {
+    min-width: 12rem;
+  }
+}
+
+/* ---------- tab row ---------- */
+.tk-tabrow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding-top: 0.25rem;
+}
+
+/* ---------- "Filtered by ..." cards (token.md §1.5) ---------- */
+.tk-filter-card {
+  margin-bottom: 0.25rem;
+}
+.tk-filter-title {
+  font-size: 0.875em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--ex-text);
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.tk-filter-icon {
+  color: var(--ex-warning);
+}
+.tk-filter-cap {
+  font-size: 0.875em;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--ex-muted);
+  margin-bottom: 0.25rem;
+}
+@media (min-width: 768px) {
+  .tk-filter-col {
+    border-left: 1px solid var(--ex-border);
+  }
+}
+.tk-filter-main {
+  min-width: 0;
+}
+
+/* ---------- Holders list (token.md §1.8.8) ---------- */
+.tk-holders th.tk-rank {
+  width: 1%;
+}
+.tk-pct {
+  min-width: 8rem;
+}
+.tk-progress {
+  height: 2px;
+  margin-top: 0.25rem;
+  background: var(--tk-track);
+  border-radius: 1px;
+  overflow: hidden;
+}
+.tk-progress-bar {
+  height: 100%;
+  background: var(--ex-primary);
+}
+
+/* ---------- Holders Overview (token.md §1.8.1-1.8.7) ---------- */
+.tk-alert {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  background: var(--tk-alert-bg);
+  border: 1px solid var(--tk-alert-border);
+  color: var(--tk-alert-text);
+  border-radius: 0.5rem;
+  padding: 0.65rem 1.95rem 0.65rem 0.65rem;
+  margin-bottom: 0.75rem;
+  word-break: break-word;
+}
+.tk-alert-text {
+  display: flex;
+  align-items: center;
+}
+.tk-alert-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  padding: 0.65rem 0.65rem;
+  line-height: 1;
+  opacity: 0.6;
+}
+.tk-alert-close:hover {
+  opacity: 1;
+}
+.card.tk-flat {
+  box-shadow: none;
+  border-radius: 0.5rem;
+}
+.tk-stat-value {
+  font-size: 1.171875rem;
+  font-weight: 500;
+  margin-bottom: 0.375rem;
+}
+.tk-hr {
+  border-color: var(--ex-border);
+  opacity: 1;
+}
+.card.tk-chart-card {
+  box-shadow: none;
+  border-radius: 0.5rem;
+  min-height: 20rem;
+}
+.card-header.tk-chart-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+}
+.tk-chart-head h6 {
+  font-size: 0.90625rem;
+}
+.tk-segment {
+  display: inline-flex;
+  gap: 0.125rem;
+  padding: 0.125rem;
+  margin: -0.25rem 0;
+  background: var(--tk-seg-bg);
+  border-radius: 0.375rem;
+}
+.tk-segment-btn {
+  border: 0;
+  background: none;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.67965rem;
+  border-radius: 0.3rem;
+  color: var(--ex-muted);
+}
+.tk-segment-btn.active {
+  background: var(--tk-seg-active);
+  color: var(--tk-seg-active-text);
+}
+.tk-chart-body {
+  padding: 0.5rem 1rem 1rem;
+}
+.tk-mini-table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--ex-text);
+  --bs-table-hover-color: var(--ex-text);
+}
+.tk-mini-table th {
+  font-weight: 500;
+  white-space: nowrap;
+  border-bottom-color: var(--ex-border);
+}
+.tk-mini-table td {
+  border-bottom-color: var(--ex-border);
+}
+.tk-mini-table tr:last-child td {
+  border-bottom: 0;
+}
+.tk-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex: none;
+}
+.tk-c1 { fill: var(--tk-c1); }
+.tk-c2 { fill: var(--tk-c2); }
+.tk-c3 { fill: var(--tk-c3); }
+.tk-c4 { fill: var(--tk-c4); }
+.tk-c5 { fill: var(--tk-c5); }
+.tk-c6 { fill: var(--tk-c6); }
+.tk-s1 { stroke: var(--tk-c1); }
+.tk-s2 { stroke: var(--tk-c2); }
+.tk-s3 { stroke: var(--tk-c3); }
+.tk-s4 { stroke: var(--tk-c4); }
+.tk-s5 { stroke: var(--tk-c5); }
+.tk-s6 { stroke: var(--tk-c6); }
+.tk-bg1 { background: var(--tk-c1); }
+.tk-bg2 { background: var(--tk-c2); }
+.tk-bg3 { background: var(--tk-c3); }
+.tk-bg4 { background: var(--tk-c4); }
+.tk-bg5 { background: var(--tk-c5); }
+.tk-bg6 { background: var(--tk-c6); }
+.tk-bg-tier { background: var(--tk-tier); }
+.tk-donut {
+  display: block;
+  width: 100%;
+  height: 13rem;
+}
+.tk-donut path:hover {
+  stroke: var(--ex-page);
+  stroke-width: 1;
+  filter: brightness(1.08);
+}
+.tk-donut-line {
+  fill: none;
+  stroke-width: 1;
+}
+.tk-donut-label text {
+  font-size: 11px;
+  fill: var(--ex-text);
+}
+.tk-donut-centre {
+  font-weight: 700;
+  fill: var(--tk-emphasis);
+}
+.tk-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 0.75rem;
+  row-gap: 0.15rem;
+  line-height: 1.15;
+  font-size: 80%;
+  margin-top: 0.25rem;
+}
+.tk-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.tk-bars {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.tk-grid {
+  stroke: var(--ex-border);
+  stroke-dasharray: 3 3;
+}
+.tk-axis {
+  font-size: 10px;
+  fill: var(--ex-muted);
+}
+.tk-cat {
+  font-size: 10px;
+  font-weight: 500;
+  fill: var(--ex-muted);
+}
+.tk-datalabel {
+  font-size: 9px;
+  fill: var(--ex-text);
+}
+.tk-bar-tier {
+  fill: var(--tk-tier);
+}
+.tk-bar-depth {
+  fill: var(--tk-depth);
+}
+
+/* ---------- NFT tables, item cells, Inventory (token.md §1.13, §1.16) ---------- */
+.tk-type-badge {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--ex-border);
+  border-radius: 50rem;
+  padding: 0.375rem 0.5rem;
+  font-size: 0.75em;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--ex-text);
+  white-space: nowrap;
+}
+.tk-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 16rem;
+}
+.tk-nft-img {
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border-radius: 0.5rem;
+  border: 1px solid var(--ex-border);
+  background: var(--ex-soft);
+  object-fit: cover;
+}
+.tk-nft-img.tk-nft-img-lg {
+  width: 72px;
+  height: 72px;
+}
+.tk-item-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.25;
+}
+.tk-item-name {
+  max-width: 11rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tk-item-sub {
+  font-size: 0.875em;
+  color: var(--ex-muted);
+  max-width: 11rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tk-inventory {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr));
+  gap: 1rem;
+}
+.tk-inv-card {
+  border: 1px solid var(--ex-border);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.tk-inv-img {
+  display: block;
+  aspect-ratio: 1 / 1;
+  background: var(--ex-soft);
+  border-bottom: 1px solid var(--ex-border);
+}
+.tk-inv-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.tk-inv-body {
+  padding: 0.5rem 0.75rem 0.75rem;
+  min-width: 0;
+}
+.tk-inv-id {
+  display: block;
+  font-weight: 500;
+}
+.tk-inv-owner {
+  font-size: 0.78515625rem;
+  margin-top: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

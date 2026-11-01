@@ -1,0 +1,369 @@
+/* address team styles. Colours only through var(--ex-*) so the light/dim/dark themes apply (see TEAM.md). */
+
+/*
+ * Colours the address page needs beyond --ex-*. Light values from etherscan.io theme.min.css; dim/dark from
+ * chrome.md §1.2-1.4 (gray scales, borders white at 15% where Etherscan writes dark:border-white).
+ */
+:root {
+  --address-pill-tag-bg: rgba(173, 181, 189, 0.15); /* bg-secondary bg-opacity-15 */
+  --address-pill-border: rgba(8, 29, 53, 0.15); /* border-dark border-opacity-15 */
+  --address-pill-text: var(--ex-dark);
+  --address-success-border: rgba(0, 161, 134, 0.25); /* border-success border-opacity-25 */
+  --address-disc: #dee2e6; /* the grey disc standing in for a token logo */
+  --address-btn-secondary-bg: var(--ex-border);
+  --address-btn-secondary-hover: #dee2e6;
+  --address-menu-shadow: 0 0.5rem 1.2rem rgba(189, 197, 209, 0.3);
+}
+[data-ex-theme='dim'] {
+  --address-pill-tag-bg: rgba(147, 163, 184, 0.15);
+  --address-pill-border: rgba(255, 255, 255, 0.15);
+  --address-pill-text: #e3e9f1;
+  --address-disc: #3a4759;
+  --address-btn-secondary-bg: #273343;
+  --address-btn-secondary-hover: #47566a;
+  --address-menu-shadow: 0 0.5rem 1.2rem rgba(82, 85, 92, 0.2);
+}
+[data-ex-theme='dark'] {
+  --address-pill-tag-bg: rgba(187, 187, 187, 0.15);
+  --address-pill-border: rgba(255, 255, 255, 0.15);
+  --address-pill-text: #f5f5f5;
+  --address-disc: #333;
+  --address-btn-secondary-bg: #222;
+  --address-btn-secondary-hover: #333;
+  --address-menu-shadow: 0 0.5rem 1.2rem rgba(82, 85, 92, 0.2);
+}
+
+/* ---------- header: 24px round icon, title, the address in body font (.9375rem, line-height 2) ---------- */
+.address-head-icon {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--address-disc);
+  object-fit: cover;
+}
+.address-main {
+  font-size: 0.9375rem;
+  line-height: 2;
+  color: var(--ex-text);
+}
+.address-head-tools .ex-copy {
+  padding: 0;
+}
+
+/* ---------- badge row pills: .badge fw-medium rounded-pill py-1.5 px-2 (10.875px / 500, pill corners) ---------- */
+.address-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  max-width: 100%;
+  padding: 0.375rem 0.5rem;
+  border: 1px solid var(--address-pill-border);
+  border-radius: 50rem;
+  font-size: 0.75em;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--address-pill-text);
+}
+.address-pill-tag {
+  background: var(--address-pill-tag-bg);
+}
+.address-pill-icon {
+  color: var(--ex-muted);
+  flex: 0 0 auto;
+}
+.address-pill-text {
+  display: block;
+  max-width: 10rem; /* .hash-tag */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.address-pill-source {
+  background: var(--ex-success-soft);
+  border-color: var(--address-success-border);
+  color: var(--ex-success);
+}
+.address-pill-white {
+  background: var(--ex-page);
+}
+a.address-pill-white:hover {
+  color: var(--address-pill-text);
+  background: var(--address-pill-tag-bg);
+}
+
+/* ---------- small dropdown menus (filter funnel, "more") ---------- */
+.address-menu {
+  position: relative;
+  display: inline-block;
+}
+.address-menu-panel {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.5rem);
+  z-index: 20;
+  min-width: 10rem;
+  padding: 0.5rem;
+  background: var(--ex-page);
+  border: 1px solid var(--ex-border);
+  border-radius: 0.75rem;
+  box-shadow: var(--address-menu-shadow);
+}
+.address-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.5rem;
+  color: var(--ex-text);
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+a.address-menu-item:hover {
+  background: var(--ex-border);
+  color: var(--ex-text);
+}
+.address-menu-item.disabled {
+  color: var(--ex-muted);
+  cursor: default;
+}
+.address-menu-icon {
+  color: var(--ex-muted);
+  flex: 0 0 auto;
+}
+.address-menu-sep {
+  border-top: 1px solid var(--ex-border);
+  margin: 0.4rem 0;
+}
+
+/* ---------- overview cards: card-body d-flex flex-column gap-5 (1.25rem), h3.h6 titles (.90625rem / 500) ---------- */
+.card-body.address-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1rem;
+}
+.address-card-title {
+  font-size: 0.90625rem;
+  font-weight: 500;
+  margin: 0;
+}
+.address-card .ex-cap {
+  margin-bottom: 0.25rem;
+}
+.address-card .ex-help {
+  color: var(--ex-muted);
+  display: inline-flex;
+  vertical-align: -1px;
+}
+
+/* Token Holdings: a white full-width button (py-2 px-3) and a square grey coins button beside it. */
+.address-holdings {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.btn.address-holdings-btn {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  text-align: left;
+  padding: 0.5rem 1rem;
+}
+.btn.address-coins {
+  --bs-btn-bg: var(--address-btn-secondary-bg);
+  --bs-btn-border-color: var(--address-btn-secondary-bg);
+  --bs-btn-hover-bg: var(--address-btn-secondary-hover);
+  --bs-btn-hover-border-color: var(--address-btn-secondary-hover);
+  --bs-btn-color: var(--ex-dark);
+  --bs-btn-hover-color: var(--ex-dark);
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+}
+.address-holdings-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 0.25rem);
+  z-index: 20;
+  overflow: hidden;
+  background: var(--ex-page);
+  border: 1px solid var(--ex-border);
+  border-radius: 0.75rem;
+  box-shadow: var(--address-menu-shadow);
+}
+.address-holdings-search {
+  background: var(--ex-soft);
+}
+.address-holdings-list {
+  max-height: 19rem;
+  overflow-y: auto;
+  padding: 0 1rem 1rem;
+}
+.address-holdings-group {
+  background: var(--ex-soft);
+  border-radius: 0.5rem;
+  padding: 0.375rem 0.5rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+.address-holdings-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--ex-border);
+  color: var(--ex-text);
+}
+.address-holdings-row:hover {
+  background: var(--ex-soft);
+  color: var(--ex-text);
+}
+.address-holdings-left {
+  min-width: 0;
+}
+.address-holdings-icon {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--address-disc);
+}
+.address-holdings-none {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 50%;
+  background: var(--ex-warning-soft);
+  color: var(--ex-warning);
+}
+.address-holdings-all {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.875rem 1rem;
+  background: var(--ex-soft);
+  border-top: 1px solid var(--ex-border);
+  color: var(--ex-muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.address-holdings-all:hover {
+  color: var(--ex-primary);
+}
+
+/* ---------- Assets tab (robin [S21]): segment + address, a bordered net-worth box, the tokens list card ---------- */
+.card-body.address-assets {
+  padding: 1rem;
+}
+.address-assets-hash {
+  font-size: 0.8125rem;
+}
+.address-networth {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  padding: 1rem;
+  border: 1px solid var(--ex-border);
+  border-radius: 0.75rem;
+}
+.address-networth-sep {
+  padding-left: 2rem;
+  border-left: 1px solid var(--ex-border);
+}
+.address-networth-value {
+  font-size: 1rem;
+}
+.card.address-assets-list {
+  box-shadow: none;
+}
+a.ex-segment-item:hover {
+  color: var(--ex-text);
+}
+
+/* A list's GET search box (Assets: token name / address; Events: topic), a search icon inside on the left. */
+.address-search {
+  position: relative;
+  min-width: 14rem;
+}
+.address-search .form-control {
+  padding-left: 2rem;
+  background: var(--ex-soft);
+}
+.address-search-icon {
+  position: absolute;
+  left: 0.65rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ex-muted);
+}
+
+/* ---------- Events tab: top-aligned rows, the Logs cell wraps; types green, names red as on Etherscan ---------- */
+.ex-table.address-events td {
+  vertical-align: top;
+}
+.ex-table.address-events td.address-log-cell {
+  white-space: normal;
+  min-width: 30rem;
+}
+.address-log {
+  font-size: 0.8125rem;
+}
+.address-log-sig {
+  margin-bottom: 0.25rem;
+  overflow-wrap: anywhere;
+}
+.address-log-type {
+  color: var(--ex-success);
+}
+.address-log-name {
+  color: var(--ex-danger);
+}
+.address-log-topics {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.5rem;
+}
+.address-log-topics li {
+  overflow-wrap: anywhere;
+}
+.address-log-box {
+  background: var(--ex-soft);
+  border: 1px solid var(--ex-border);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  max-height: 12rem;
+  overflow: auto;
+  overflow-wrap: anywhere;
+}
+.btn.address-log-switch {
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+}
+.btn.address-log-switch.active {
+  background: var(--ex-border);
+  color: var(--ex-text);
+}
+.address-log-guess {
+  display: inline-block;
+  margin-right: 0.375rem;
+  padding: 0.125rem 0.375rem;
+  border: 1px solid var(--ex-border);
+  border-radius: 0.375rem;
+  color: var(--ex-muted);
+  font-size: 0.6875rem;
+  cursor: help;
+}

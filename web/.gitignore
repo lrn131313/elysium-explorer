@@ -1,0 +1,11 @@
+# dependencies and build output
+node_modules/
+.next/
+tsconfig.tsbuildinfo
+
+# server-side settings (no secrets, but machine-specific)
+.env.local
+
+# local tooling
+.playwright-mcp/
+.DS_Store

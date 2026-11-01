@@ -1,0 +1,199 @@
+/* chain team styles. Colours only through var(--ex-*) so the light/dim/dark themes apply (see TEAM.md). */
+
+/* ---------- figure cards (Verified Contracts, Charts & Stats): Etherscan's a.card.group with h6.text-cap ---------- */
+.chain-tile-link {
+  color: var(--ex-text);
+  text-decoration: none;
+}
+.chain-tile-link:hover {
+  color: var(--ex-text);
+  border-color: var(--ex-primary);
+}
+.chain-tile-link .chain-tile-arrow {
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.chain-tile-link:hover .chain-tile-arrow {
+  opacity: 1;
+}
+
+/* ---------- the filter row above a list: "Filter by" on the left, the search box on the right ---------- */
+.card-header.chain-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+/* A dropdown that needs no script: <details> opens and closes it. */
+.chain-dropdown {
+  position: relative;
+}
+.chain-dropdown > summary {
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+.chain-dropdown > summary::-webkit-details-marker {
+  display: none;
+}
+.chain-dropdown > .dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  min-width: 200px;
+  z-index: 1000;
+}
+.chain-search {
+  width: auto;
+  min-width: min(20rem, 100%);
+}
+
+/* Verified Contracts "Setting": a round badge per setting, the setting's name on hover. */
+.chain-setting {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  border: 1px solid var(--ex-border);
+  background: var(--ex-soft);
+  color: var(--ex-muted);
+}
+
+/* ---------- Gas Tracker: dark banner, then the price cards pulled up over it (Etherscan py-12 pb-36 / mt-n36) ---------- */
+.ex-hero.chain-gas-hero {
+  padding: 3rem 0 9rem;
+}
+.chain-gas-overlap {
+  margin-top: -7rem;
+  position: relative;
+  z-index: 1;
+}
+.chain-gas-standard {
+  color: var(--ex-success);
+}
+.chain-gas-fast {
+  color: var(--ex-primary);
+}
+.chain-gas-rapid {
+  color: var(--ex-danger);
+}
+.chain-info-tile {
+  background: var(--ex-soft);
+}
+.chain-gas-bar {
+  height: 2px;
+  max-width: 10rem;
+  margin-top: 0.25rem;
+  background: var(--ex-border);
+}
+.chain-gas-bar > .progress-bar {
+  background: var(--ex-primary);
+}
+.chain-gas-input {
+  min-width: 9rem;
+}
+
+/* ---------- Charts & Stats: server-drawn SVG line charts (components/chain-chart.tsx) ---------- */
+.chain-chart {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.chain-chart-grid line {
+  stroke: var(--ex-border);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.chain-chart-grid text,
+.chain-chart-xlabel {
+  fill: var(--ex-muted);
+}
+.chain-chart-line {
+  fill: none;
+  stroke: var(--ex-primary);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+.chain-chart-area {
+  fill: var(--ex-primary);
+  fill-opacity: 0.08;
+}
+/* Each day's hover strip: invisible, but it catches the pointer. */
+.chain-chart-strip {
+  fill: transparent;
+}
+.chain-chart-cross {
+  stroke: var(--ex-muted);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+  vector-effect: non-scaling-stroke;
+}
+.chain-chart-dot {
+  fill: var(--ex-primary);
+  stroke: var(--ex-page);
+  stroke-width: 2;
+}
+.chain-chart-cross,
+.chain-chart-dot,
+.chain-chart-tip {
+  opacity: 0;
+  pointer-events: none;
+}
+.chain-chart-hit:hover .chain-chart-cross,
+.chain-chart-hit:hover .chain-chart-dot,
+.chain-chart-hit:hover .chain-chart-tip {
+  opacity: 1;
+}
+.chain-chart-tip rect {
+  fill: var(--ex-page);
+  stroke: var(--ex-border);
+  vector-effect: non-scaling-stroke;
+}
+.chain-chart-tip-day {
+  fill: var(--ex-muted);
+}
+.chain-chart-tip-value {
+  fill: var(--ex-text);
+  font-weight: 500;
+}
+
+/* Charts & Stats index: sticky section menu on the left, sections split by a rule (Etherscan pb-10 mb-10). */
+.chain-side-nav {
+  position: sticky;
+  top: 4.5rem;
+}
+.chain-side-nav .nav-link {
+  color: var(--ex-text);
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+}
+.chain-side-nav .nav-link:hover {
+  background: var(--ex-soft);
+  color: var(--ex-primary);
+}
+.chain-section {
+  scroll-margin-top: 4.5rem;
+  border-bottom: 1px solid var(--ex-border);
+  padding-bottom: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+.chain-section:last-child {
+  border-bottom: 0;
+}
+/* A chart page's data table, folded under its header until asked for. */
+.chain-data-table > summary {
+  cursor: pointer;
+  font-weight: 500;
+}
+.chain-data-table:not([open]) > summary {
+  border-bottom: 0;
+}
